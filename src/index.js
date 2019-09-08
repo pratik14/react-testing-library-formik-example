@@ -1,10 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import "./index.css";
+import App from "./App";
+import { Container, Row, Col } from "react-bootstrap";
+import * as serviceWorker from "./serviceWorker";
+
+const Index = () => (
+  <div className="container">
+    <App />
+  </div>
+);
+
+ReactDOM.render(<Index />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
