@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 
 import "./index.css";
 import App from "./App";
-import { Container, Row, Col } from "react-bootstrap";
 import * as serviceWorker from "./serviceWorker";
 
 const Index = () => (

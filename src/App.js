@@ -25,8 +25,10 @@ const App = () => (
     >
       {({ isSubmitting }) => (
         <Form>
-          <Field type="email" name="email" />
-          <ErrorMessage name="email" component="div" />
+          <label htmlFor="email">Email</label>
+          <Field id="email" type="email" name="email" />
+          <ErrorMessage data-testid="emailError" name="email" component="div" />
+          <br />
           <button type="submit" disabled={isSubmitting}>
             Submit
           </button>
