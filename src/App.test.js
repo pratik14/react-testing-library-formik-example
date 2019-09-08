@@ -14,3 +14,38 @@ it("should show validation on blur", async () => {
     expect(getByTestId("emailError")).toHaveTextContent("Required");
   });
 });
+
+it("should show date validation on click on submit", async () => {
+  const { getByText, getByTestId } = render(<App />);
+
+  const button = getByText("Submit");
+  fireEvent.click(button);
+
+  await wait(() => {
+    expect(getByTestId("dateError")).toHaveTextContent("Required");
+  });
+});
+
+jest.mock("react-datepicker", () => props => (
+  <input
+    data-testid="mockedDateField"
+    onChange={() => {
+      console.log(props.onChange);
+      props.onChange("asdfasd");
+    }}
+  />
+));
+
+test("should remove date error id we select date", async () => {
+  const { getByText, getByTestId, queryByTestId } = render(<App />);
+
+  const button = getByText("Submit");
+  fireEvent.click(button);
+
+  const mockedDateField = getByTestId("mockedDateField");
+  fireEvent.change(mockedDateField, { target: { value: new Date() } });
+
+  await wait(() => {
+    expect(queryByTestId("dateError")).toBe(null);
+  });
+});
