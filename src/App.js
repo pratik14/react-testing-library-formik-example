@@ -1,12 +1,18 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 const App = () => (
   <div>
     <Formik
-      initialValues={{ email: "", password: "" }}
+      initialValues={{ email: "", date: "" }}
       validate={values => {
         let errors = {};
+        if (!values.date) {
+          errors.date = "Required";
+        }
         if (!values.email) {
           errors.email = "Required";
         } else if (
@@ -23,11 +29,19 @@ const App = () => (
         }, 400);
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, setFieldValue, values }) => (
         <Form>
           <label htmlFor="email">Email</label>
           <Field id="email" type="email" name="email" />
           <ErrorMessage data-testid="emailError" name="email" component="div" />
+          <br />
+          <DatePicker
+            selected={values.date}
+            onChange={event => {
+              setFieldValue("date", event);
+            }}
+          />
+          <ErrorMessage data-testid="dateError" name="date" component="div" />
           <br />
           <button type="submit" disabled={isSubmitting}>
             Submit
